@@ -1,4 +1,3 @@
-const library = document.querySelector(".library");
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -23,11 +22,13 @@ function addBookToLibrary() {
 function removeBook(id) {
     const index = myLibrary.findIndex(book => book.id === id);
     myLibrary.splice(index, 1);
-    library.replaceChildren();
     displayBooks();
 }
 
 function displayBooks() {
+    const library = document.querySelector(".library");
+    library.innerHTML = "";
+    
     myLibrary.forEach(book => {
         const bookCard = document.createElement("div");
         bookCard.classList.add("book-card");

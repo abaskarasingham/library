@@ -15,8 +15,8 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.read) ? "has been read" : "not read yet"}, ID:${this.id}`;
 }
 
-function addBookToLibrary() {
-
+function addBookToLibrary(title, author, pages) {
+    myLibrary.push(new Book(title, author, pages, false));
 }
 
 function removeBook(id) {
@@ -63,6 +63,17 @@ let book3 = new Book("Bone", "Jeff Smith", 145, true);
 myLibrary.push(book, book2, book3);
 displayBooks();
 
-console.log(book.info());
-console.log(book2.info());
-console.log(book3.info());
+const form = document.querySelector("dialog form");
+
+form.addEventListener("submit", function(event) {
+    const title = document.querySelector("#title");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+
+    addBookToLibrary(title.value, author.value, pages.value);
+    displayBooks();
+
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+});

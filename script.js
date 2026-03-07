@@ -15,6 +15,11 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.read) ? "has been read" : "not read yet"}, ID:${this.id}`;
 }
 
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+    displayBooks();
+}
+
 function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages, false));
 }
@@ -51,7 +56,13 @@ function displayBooks() {
             removeBook(book.id);
         });
 
-        bookCard.append(title, author, pages, status, removeBtn);
+        const readBtn = document.createElement("button");
+        readBtn.textContent = "Read";
+        readBtn.addEventListener("click", () => {
+            book.toggleRead();
+        });
+
+        bookCard.append(title, author, pages, status, removeBtn, readBtn);
         library.appendChild(bookCard);
     });
 }

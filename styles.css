@@ -19,6 +19,11 @@ body {
     width: 300px;
 }
 
+.book-card .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 form {
     display: flex;
     flex-direction: column;

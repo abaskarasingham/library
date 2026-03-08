@@ -37,6 +37,7 @@ function displayBooks() {
     myLibrary.forEach(book => {
         const bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
+        bookCard.dataset.id = book.id;
 
         const title = document.createElement("h2");
         title.textContent = book.title;
@@ -50,19 +51,24 @@ function displayBooks() {
         const status = document.createElement("p");
         status.textContent = `Status: ${book.read ? "Has been read" : "Not read yet"}`;
 
+        const buttons = document.createElement("div");
+        buttons.classList.add("buttons");
+
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
         removeBtn.addEventListener("click", () => {
             removeBook(book.id);
         });
+        buttons.append(removeBtn);
 
         const readBtn = document.createElement("button");
         readBtn.textContent = "Read";
         readBtn.addEventListener("click", () => {
             book.toggleRead();
         });
+        buttons.append(readBtn);
 
-        bookCard.append(title, author, pages, status, removeBtn, readBtn);
+        bookCard.append(title, author, pages, status, buttons);
         library.appendChild(bookCard);
     });
 }
